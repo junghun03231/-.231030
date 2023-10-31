@@ -1,13 +1,25 @@
-package org.example;
+package article.controller;
+
+import article.entity.Article;
+import member.entity.Member;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class ArticleController {
+    List<Article> articleList = new ArrayList<>();
+    Member loginMember;
+    int lastId = 1;
+    Scanner sc;
+
     void exit() {
         System.out.print("== 프로그램을 종료합니다 ==");
     }
-    void write() {
+
+    public void write() {
         if (loginMember == null) {
             System.out.println("== 비회원은 게시글 작성을 할 수 없습니다 ==");
-            continue;
         }
         System.out.print("제목: ");
         String title = sc.nextLine();
@@ -19,7 +31,8 @@ public class ArticleController {
         articleList.add(article);
         lastId++;
     }
-    void list() {
+
+    public void list() {
         if (articleList.size() == 0) {
             System.out.println("작성된 게시글이 없습니다.");
         } else {
@@ -30,7 +43,8 @@ public class ArticleController {
             }
         }
     }
-    void remove() {
+
+    public void remove() {
         if (articleList.size() == 0) {
             System.out.println("작성된 게시글이 없습니다.");
         } else {
@@ -44,7 +58,8 @@ public class ArticleController {
             }
         }
     }
-    void modify() {
+
+    public void modify() {
         for (Article article : articleList) {
             System.out.printf("%d / %s / %s / %s \n", article.getId(), article.getTitle(), article.getBody(), article.getUserId());
         }

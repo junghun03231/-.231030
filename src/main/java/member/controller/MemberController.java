@@ -1,7 +1,17 @@
-package org.example;
+package member.controller;
+
+import member.entity.Member;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class MemberController {
-    void join () {
+    List<Member> memberList = new ArrayList<>();
+    Member loginMember;
+    Scanner sc;
+
+    public void join() {
         String userId;
         String password;
         String passwordconfirm;
@@ -28,10 +38,10 @@ public class MemberController {
         Member member = new Member(userId, password);
         memberList.add(member);
     }
-    void login() {
+
+    public void login() {
         if (loginMember != null) {
             System.out.println("== 로그인 상태 입니다 ==");
-            continue;
         }
 
         boolean checkedUserId = false;
@@ -51,21 +61,18 @@ public class MemberController {
         }
         if (checkedUserId == false) {
             System.out.println("해당 회원이 존재하지 않습니다.");
-            continue;
         }
 
         if (member.getPassword().equals(password) == false) {
             System.out.println("비밀번호가 일치하지 않습니다.");
-            continue;
         }
         loginMember = member;
         System.out.println("== 로그인이 완료되었습니다 ==\n" + loginMember.getUserId() + "님 환영합니다.");
     }
 
-    void logout() {
+    public void logout() {
         if (loginMember == null) {
             System.out.println("이미 로그아웃 상태입니다.");
-            continue;
         }
         loginMember = null;
         System.out.println("== 계정이 로그아웃 되었습니다 ==");
