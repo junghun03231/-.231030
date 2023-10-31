@@ -18,4 +18,8 @@ public class container {
         sc = new Scanner(System.in);
     }
 
+    public static void close() {
+        sc.close();
+    }
+
 }

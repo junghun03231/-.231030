@@ -53,10 +53,13 @@ public class ArticleController {
                     articleList.remove(article);
                     System.out.println(id + "번 게시물이 삭제 되었습니다.");
                 }
+                if (id > articleList.size()){
+                    System.out.println(id + "번째 글이 존재하지 않습니다.");
+                    return;
+                }
             }
         }
     }
-
     public void modify() {
         if (articleList.size() == 0) {
             System.out.println("작성된 게시글이 없습니다.");
@@ -79,6 +82,10 @@ public class ArticleController {
                 System.out.print("내용: ");
                 String body = container.getSc().nextLine();
                 article.setBody(body);
+            }
+            if (modifyId > articleList.size()){
+                System.out.println(modifyId + "번째 글이 존재하지 않습니다.");
+                return;
             }
         }
         System.out.println(modifyId + "번 게사물이 수정 되었습니다");
