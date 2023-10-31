@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 public class MemberController {
     List<Member> memberList = new ArrayList<>();
-    Member loginMember;
 
     public void init() {
         Member member1 = new Member("user", "1");
@@ -45,7 +44,7 @@ public class MemberController {
     }
 
     public void login() {
-        if (loginMember != null) {
+        if (container.getLoginMember() != null) {
             System.out.println("== 로그인 상태 입니다 ==");
             return;
         }
@@ -74,16 +73,16 @@ public class MemberController {
             System.out.println("비밀번호가 일치하지 않습니다.");
             return;
         }
-        loginMember = member;
-        System.out.println("== 로그인이 완료되었습니다 ==\n" + loginMember.getUserId() + "님 환영합니다.");
+        container.setLoginMember(member);
+        System.out.println("== 로그인이 완료되었습니다 ==\n" + container.getLoginMember().getUserId() + "님 환영합니다.");
     }
 
     public void logout() {
-        if (loginMember == null) {
+        if (container.getLoginMember() == null) {
             System.out.println("이미 로그아웃 상태입니다.");
             return;
         }
-        loginMember = null;
+        container.setLoginMember(null);
         System.out.println("== 계정이 로그아웃 되었습니다 ==");
     }
 }
