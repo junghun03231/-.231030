@@ -1,7 +1,8 @@
-package article.controller;
+package org.example.article.controller;
 
-import article.entity.Article;
-import member.entity.Member;
+import org.example.article.entity.Article;
+import org.example.container;
+import org.example.member.entity.Member;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,22 +10,18 @@ import java.util.Scanner;
 
 public class ArticleController {
     List<Article> articleList = new ArrayList<>();
-    Member loginMember;
     int lastId = 1;
-    Scanner sc;
-
-    void exit() {
-        System.out.print("== 프로그램을 종료합니다 ==");
-    }
+    Member loginMember;
 
     public void write() {
         if (loginMember == null) {
             System.out.println("== 비회원은 게시글 작성을 할 수 없습니다 ==");
+            return;
         }
         System.out.print("제목: ");
-        String title = sc.nextLine();
+        String title = container.getSc().nextLine();
         System.out.print("내용: ");
-        String body = sc.nextLine();
+        String body = container.getSc().nextLine();
 
         System.out.println("== 게시글 작성이 완료되었습니다 ==");
         Article article = new Article(lastId, title, body, loginMember.getUserId());
@@ -48,7 +45,7 @@ public class ArticleController {
         if (articleList.size() == 0) {
             System.out.println("작성된 게시글이 없습니다.");
         } else {
-            int id = sc.nextInt();
+            int id = container.getSc().nextInt();
             System.out.print("삭제할 글 번호: ");
             for (int i = 0; i < articleList.size(); i++) {
                 Article article = articleList.get(i);
@@ -60,22 +57,27 @@ public class ArticleController {
     }
 
     public void modify() {
+        if (articleList.size() == 0) {
+            System.out.println("작성된 게시글이 없습니다.");
+            return;
+        }
+
         for (Article article : articleList) {
             System.out.printf("%d / %s / %s / %s \n", article.getId(), article.getTitle(), article.getBody(), article.getUserId());
         }
         System.out.print("수정할 글 번호: ");
-        int modifyId = sc.nextInt();
+        int modifyId = container.getSc().nextInt();
 
         for (int i = 0; i < articleList.size(); i++) {
             Article article = articleList.get(i);
             if (article.getId() == modifyId) {
 
                 System.out.print("제목: \n");
-                String title = sc.nextLine();
+                String title = container.getSc().nextLine();
                 article.setTitle(title);
 
                 System.out.print("내용:");
-                String body = sc.nextLine();
+                String body = container.getSc().nextLine();
                 article.setBody(body);
             }
         }

@@ -1,6 +1,7 @@
-package member.controller;
+package org.example.member.controller;
 
-import member.entity.Member;
+import org.example.container;
+import org.example.member.entity.Member;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +10,8 @@ import java.util.Scanner;
 public class MemberController {
     List<Member> memberList = new ArrayList<>();
     Member loginMember;
-    Scanner sc;
 
-    public  void  init () {
+    public void init() {
         Member member1 = new Member("user", "1");
         memberList.add(member1);
     }
@@ -23,15 +23,15 @@ public class MemberController {
 
         while (true) {
             System.out.print("아이디: ");
-            userId = sc.nextLine();
+            userId = container.getSc().nextLine();
             break;
         }
         while (true) {
             System.out.print("비밀번호: ");
-            password = sc.nextLine();
+            password = container.getSc().nextLine();
 
             System.out.print("비밀번호 재확인: ");
-            passwordconfirm = sc.nextLine();
+            passwordconfirm = container.getSc().nextLine();
 
             if (!password.equals(passwordconfirm)) {
                 System.out.println("비밀번호가 다릅니다. // 다시 입력해 주세요");
@@ -47,15 +47,16 @@ public class MemberController {
     public void login() {
         if (loginMember != null) {
             System.out.println("== 로그인 상태 입니다 ==");
+            return;
         }
 
         boolean checkedUserId = false;
         Member member = null;
 
         System.out.print("아이디: ");
-        String userId = sc.nextLine();
+        String userId = container.getSc().nextLine();
         System.out.print("비밀번호: ");
-        String password = sc.nextLine();
+        String password = container.getSc().nextLine();
 
         for (int i = 0; i < memberList.size(); i++) {
             if (memberList.get(i).getUserId().equals(userId)) {
@@ -64,12 +65,14 @@ public class MemberController {
                 break;
             }
         }
-        if (checkedUserId == false) {
+        if (!checkedUserId) {
             System.out.println("해당 회원이 존재하지 않습니다.");
+            return;
         }
 
-        if (member.getPassword().equals(password) == false) {
+        if (!member.getPassword().equals(password)) {
             System.out.println("비밀번호가 일치하지 않습니다.");
+            return;
         }
         loginMember = member;
         System.out.println("== 로그인이 완료되었습니다 ==\n" + loginMember.getUserId() + "님 환영합니다.");
@@ -78,6 +81,7 @@ public class MemberController {
     public void logout() {
         if (loginMember == null) {
             System.out.println("이미 로그아웃 상태입니다.");
+            return;
         }
         loginMember = null;
         System.out.println("== 계정이 로그아웃 되었습니다 ==");

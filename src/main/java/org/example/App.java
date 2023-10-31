@@ -1,13 +1,12 @@
 package org.example;
 
-import article.controller.ArticleController;
-import member.entity.Member;
-import member.controller.MemberController;
+import org.example.article.controller.ArticleController;
+import org.example.member.entity.Member;
+import org.example.member.controller.MemberController;
 
 import java.util.Scanner;
 
 public class App {
-    Scanner sc = new Scanner(System.in);
     Member loginMember = null;
 
     void run() {
@@ -16,10 +15,10 @@ public class App {
         SystemController systemController = new SystemController();
 
         while (true) {
-            System.out.print("명령어: ");
-            String command = sc.nextLine();
-
             memberController.init();
+
+            System.out.print("명령어: ");
+            String command = container.getSc().nextLine();
 
             switch (command) {
                 case "종료":

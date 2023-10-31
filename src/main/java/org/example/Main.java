@@ -7,10 +7,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
+        container.scan();
         new App().run();
     }
-
 }
-// 스캔에서 실행이 막히는거 같습니다
 
