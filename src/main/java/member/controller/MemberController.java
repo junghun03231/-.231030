@@ -11,6 +11,11 @@ public class MemberController {
     Member loginMember;
     Scanner sc;
 
+    public  void  init () {
+        Member member1 = new Member("user", "1");
+        memberList.add(member1);
+    }
+
     public void join() {
         String userId;
         String password;

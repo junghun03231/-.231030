@@ -19,6 +19,8 @@ public class App {
             System.out.print("명령어: ");
             String command = sc.nextLine();
 
+            memberController.init();
+
             switch (command) {
                 case "종료":
                     systemController.exit();
